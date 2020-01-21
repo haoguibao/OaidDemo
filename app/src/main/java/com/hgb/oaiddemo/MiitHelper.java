@@ -31,15 +31,16 @@ public class MiitHelper implements IIdentifierListener {
         long timee = System.currentTimeMillis();
         long offset = timee - timeb;
         if (nres == ErrorCode.INIT_ERROR_DEVICE_NOSUPPORT) {//1008612 不支持的设备
-            MyApplication.setIsSupportOaid(false,nres);
+            MyApplication.setIsSupportOaid(false, nres);
         } else if (nres == ErrorCode.INIT_ERROR_LOAD_CONFIGFILE) {//1008613 加载配置文件出错
-            MyApplication.setIsSupportOaid(false,nres);
+            MyApplication.setIsSupportOaid(false, nres);
         } else if (nres == ErrorCode.INIT_ERROR_MANUFACTURER_NOSUPPORT) {//1008611 不支持的设备厂商
-            MyApplication.setIsSupportOaid(false,nres);
+            MyApplication.setIsSupportOaid(false, nres);
         } else if (nres == ErrorCode.INIT_ERROR_RESULT_DELAY) {//1008614 获取接口是异步的，结果会在回调中返回，回调执行的回调可能在工作线程
-            MyApplication.setIsSupportOaid(false,nres);
+            //TODO 这种情况，还不清楚怎么解决呢。暂且先返false
+            MyApplication.setIsSupportOaid(false, nres);
         } else if (nres == ErrorCode.INIT_HELPER_CALL_ERROR) {//1008615 反射调用出错
-            MyApplication.setIsSupportOaid(false,nres);
+            MyApplication.setIsSupportOaid(false, nres);
         }
         Log.d(getClass().getSimpleName(), "return value: " + String.valueOf(nres));
 
@@ -81,6 +82,9 @@ public class MiitHelper implements IIdentifierListener {
         builder.append("VAID: ").append(vaid).append("\n");
         builder.append("AAID: ").append(aaid).append("\n");
         String idstext=builder.toString();*/
+
+        MyApplication.setIsSupportOaid(isSupport);
+
         String oaid = _supplier.getOAID();
         _supplier.shutDown();           //关闭接口
         if (_listener != null) {

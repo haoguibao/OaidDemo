@@ -33,6 +33,9 @@ public class MyApplication extends Application {
         return isSupportOaid;
     }
 
+    public static void setIsSupportOaid(boolean isSupportOaid) {
+        MyApplication.isSupportOaid = isSupportOaid;
+    }
     public static void setIsSupportOaid(boolean isSupportOaid,int ErrorCode) {
         MyApplication.isSupportOaid = isSupportOaid;
         MyApplication.errorCode=ErrorCode;
