@@ -29,8 +29,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //移动安全联盟MSA sdk依赖
-    implementation files('libs/miit_mdid_1.0.9.aar')
-
-    //rxJava3.x (如果你集成的其他开源框架已经引用rxJava2.x或rxJava3.x，则不需要再次引用)
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0-RC3'
+    implementation files('libs/miit_mdid_1.0.10.aar')
 }

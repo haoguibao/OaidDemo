@@ -1,27 +1,24 @@
 package com.hgb.oaiddemo;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.hgb.oaiddemo.rxpermissions2.RxPermissions;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-
-import io.reactivex.rxjava3.functions.Consumer;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvContent;
     private MainActivity mContext;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tvContent = findViewById(R.id.tv_content);
-        askPermission();
+        tvContent.setText("OAID: " + DevicesUtil.getOaid());
     }
 
     @Override
@@ -66,20 +63,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * 获取读取手机信息的权限
-     * 此处为了获取IMEI权限
-     */
-    private void askPermission() {
-        RxPermissions rxPermissions = new RxPermissions(this);
-        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        //根据结果去做相应处理。
-                        tvContent.setText("idfa: " + DevicesUtil.getIdfa(mContext));
-                    }
-                });
-    }
 
 }

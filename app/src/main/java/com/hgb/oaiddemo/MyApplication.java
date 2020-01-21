@@ -19,18 +19,23 @@ public class MyApplication extends Application {
     private static String oaid;
 
 
-    private static boolean isSupportOaid;
+    private static boolean isSupportOaid=true;
+    private static int errorCode;
 
     public static String getOaid() {
         return oaid;
+    }
+    public static String getErrorCode() {
+        return String.valueOf(errorCode);
     }
 
     public static boolean isSupportOaid() {
         return isSupportOaid;
     }
 
-    public static void setIsSupportOaid(boolean isSupportOaid) {
+    public static void setIsSupportOaid(boolean isSupportOaid,int ErrorCode) {
         MyApplication.isSupportOaid = isSupportOaid;
+        MyApplication.errorCode=ErrorCode;
     }
 
 
